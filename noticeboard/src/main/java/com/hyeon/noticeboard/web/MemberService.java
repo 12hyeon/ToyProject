@@ -1,5 +1,6 @@
 package com.hyeon.noticeboard.web;
 
+import com.hyeon.noticeboard.kakao.KakaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final KakaoService ks;
 
     // 로그인
     public Long login(String id, String pwd) {
@@ -29,7 +31,6 @@ public class MemberService {
         //validateDuplicateMember(member); // 중복 회원 검증 제외
         Member member = Member.builder()
                 .id(id)
-                .pwd(pwd)
                 .name(name)
                 .build();
         return memberRepository.save(member);
@@ -45,6 +46,5 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
-
 
 }

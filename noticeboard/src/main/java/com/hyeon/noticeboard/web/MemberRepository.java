@@ -1,5 +1,6 @@
 package com.hyeon.noticeboard.web;
 
+import com.hyeon.noticeboard.kakao.KakaoDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -50,6 +51,33 @@ public class MemberRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
-    
+
+    // 정보 저장
+    public void kakaoinsert(KakaoDTO userInfo) {
+        Member member = Member.builder()
+                .id(userInfo.getId()).name(userInfo.getName()).email(userInfo.getEmail())
+                .build();
+
+        save(member);
+    }
+
+    // 정보 확인
+    public KakaoDTO findkakao(KakaoDTO userInfo) {
+        List<Member> members = findByName(userInfo.getName());
+
+        KakaoDTO dto;
+        if (members.isEmpty()) {
+            dto = null;
+        }
+        else {
+            dto = KakaoDTO.builder()
+                    .id(userInfo.getId()).name(userInfo.getName()).email(userInfo.getEmail())
+                    .build();
+            System.out.println("RN:"+dto.getName());
+            System.out.println("RE:"+dto.getEmail());
+        }
+
+        return dto;
+    }
 
 }

@@ -21,7 +21,9 @@ public class Member {
 
     private String id;
     private String pwd;
+    private String email;
 
+    private String token;
     private Integer age;
 
     //@Temporal(TemporalType.TIMESTAMP) // 날짜와 시간 타입 매핑
@@ -32,10 +34,11 @@ public class Member {
 
 
     @Builder
-    private Member(String id, String pwd, String name) {
+    private Member(String id, String name, String email) {
         this.id = id;
         this.pwd = pwd;
         this.name = name;
+        this.email = email;
 
         this.createdDate = new Date();
         this.lastModifiedDate = new Date();

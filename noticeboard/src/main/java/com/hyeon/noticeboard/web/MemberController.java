@@ -14,6 +14,11 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    @GetMapping(value = "/home")
+    public String home() {
+        return "MyReform";
+    }
+
     // 회원가입
     @PostMapping(value = "/members/new")
     public String join(@RequestParam("id") String id,
